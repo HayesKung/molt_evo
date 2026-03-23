@@ -1,25 +1,15 @@
 # molt_evo
 
-molt_evo is a reusable local capability pack for OpenClaw that adds a persistent local learning layer.
+molt_evo is a reusable local learning and runtime memory layer for OpenClaw.
 
-## Capabilities
-- local persistent memory database (SQLite)
+It provides:
+- persistent local memory storage
 - structured daily summaries
-- tracked preference / rule / objective / profile evolution
-- conversation ingestion pipeline
+- conversation ingestion
 - normalization and conflict detection
-- alert, push, and feedback closure workflows
-- backup / export / import / merge
-- install / upgrade / uninstall / bootstrap / healthcheck / selftest
-
-## Public entrypoints
-The public primary entrypoints are now:
-- `molt_evo_*` scripts
-- `molt-evo-*` service/timer units
-- `manage.sh`
-- `Makefile`
-
-Legacy `legacy_*` files are currently kept only as a compatibility layer during migration.
+- conflict alert / notify / feedback workflows
+- backup / export / import support
+- systemd-based background automation helpers
 
 ## Quick start
 ```bash
@@ -27,6 +17,12 @@ bash manage.sh install
 bash manage.sh healthcheck
 bash manage.sh selftest
 ```
+
+## Public entrypoints
+- `molt_evo_*` scripts
+- `molt-evo-*` service and timer units
+- `manage.sh`
+- `Makefile`
 
 ## Common commands
 ```bash
@@ -46,8 +42,14 @@ bash manage.sh uninstall
 - `PRIVACY_AND_SECURITY.md`
 - `RELEASE.md`
 - `CHANGELOG.md`
+- `CHAT_COMMANDS.md`
 - `VERSION`
 - `SKILL.md`
 
-## Important note
-This repository is still in active generalization work. Before public release, complete the remaining cleanup listed in `AUDIT.md` and `SECOND_PASS_REVIEW.md`.
+## Runtime notes
+- default runtime data root: `.openclaw/molt_evo`
+- default database filename: `molt_evo_memory.db`
+- path and runtime behavior should be configured through environment variables where needed
+
+## Release surface
+Historical migration material is kept outside the strict public release surface under `release-excluded/`.
