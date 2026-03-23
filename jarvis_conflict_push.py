@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-import sqlite3, json, sys
+import sqlite3, json, os
 from pathlib import Path
 
-ROOT = Path('/root/.openclaw/workspace')
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
 DB = ROOT / '.openclaw' / 'jarvis' / 'jarvis_memory.db'
-DEFAULT_TARGET = 'user:ou_a78e8c3060bcc9aaa06ce4f44096d6ba'
+DEFAULT_CHANNEL = os.environ.get('MOLT_EVO_DEFAULT_CHANNEL', '')
+DEFAULT_TARGET = os.environ.get('MOLT_EVO_DEFAULT_TARGET', '')
 
 def main():
     conn = sqlite3.connect(DB)
@@ -46,19 +47,18 @@ def main():
 
     cid, item_key, table_name, old_value, new_value, severity, reason = row
     msg = (
-        f"Jarvis 冲突提醒\n"
-        f"对象：{table_name}.{item_key}\n"
-        f"等级：{severity}\n"
-        f"旧值：{old_value or '<empty>'}\n"
-        f"新值：{new_value}\n"
-        f"原因：{reason}"
+        f"molt_evo conflict alert\n"
+        f"object: {table_name}.{item_key}\n"
+        f"severity: {severity}\n"
+        f"old: {old_value or '<empty>'}\n"
+        f"new: {new_value}\n"
+        f"reason: {reason}"
     )
 
-    # 输出 JSON，交给外层调用 message 工具发送
     print(json.dumps({
         'status': 'ready',
         'conflict_id': cid,
-        'channel': 'feishu',
+        'channel': DEFAULT_CHANNEL,
         'target': DEFAULT_TARGET,
         'message': msg,
     }, ensure_ascii=False))
