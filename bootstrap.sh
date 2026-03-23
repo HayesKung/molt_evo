@@ -10,8 +10,6 @@ mkdir -p "$TARGET_DIR"
 echo '[bootstrap] install python/runtime assets'
 cp "$REPO_DIR"/molt_evo_*.py "$TARGET_DIR"/
 cp "$REPO_DIR"/molt_evo_backup.sh "$TARGET_DIR"/
-cp "$REPO_DIR"/JARVIS_MODE.md "$TARGET_DIR"/
-cp "$REPO_DIR"/docs-jarvis-"*".md "$TARGET_DIR"/ 2>/dev/null || true
 chmod +x "$TARGET_DIR"/molt_evo_*.py "$TARGET_DIR"/molt_evo_backup.sh || true
 
 echo '[bootstrap] install systemd units'

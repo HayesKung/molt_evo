@@ -5,10 +5,8 @@ SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 TARGET_DIR="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}"
 SYSTEMD_DIR="/etc/systemd/system"
 
-echo "[jarvis] upgrade sync to $TARGET_DIR"
+echo "[molt_evo] upgrade sync to $TARGET_DIR"
 cp "$SRC_DIR"/molt_evo_*.py "$TARGET_DIR"/
-cp "$SRC_DIR"/JARVIS_MODE.md "$TARGET_DIR"/
-cp "$SRC_DIR"/docs-jarvis-"*".md "$TARGET_DIR"/ 2>/dev/null || true
 cp "$SRC_DIR"/molt_evo_backup.sh "$TARGET_DIR"/
 chmod +x "$TARGET_DIR"/molt_evo_*.py "$TARGET_DIR"/molt_evo_backup.sh || true
 
@@ -27,4 +25,4 @@ systemctl restart molt-evo-backup.timer || true
 systemctl restart molt-evo-message-ingest.timer || true
 python3 "$TARGET_DIR"/molt_evo_daily_summary.py >/dev/null || true
 
-echo "[jarvis] upgrade complete"
+echo "[molt_evo] upgrade complete"

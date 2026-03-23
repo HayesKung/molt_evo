@@ -5,16 +5,14 @@ SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 TARGET_DIR="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}"
 SYSTEMD_DIR="/etc/systemd/system"
 
-echo "[jarvis] sync scripts to $TARGET_DIR"
+echo "[molt_evo] sync scripts to $TARGET_DIR"
 mkdir -p "$TARGET_DIR"
 
 cp "$SRC_DIR"/molt_evo_*.py "$TARGET_DIR"/
-cp "$SRC_DIR"/JARVIS_MODE.md "$TARGET_DIR"/
-cp "$SRC_DIR"/docs-jarvis-"*".md "$TARGET_DIR"/ 2>/dev/null || true
 cp "$SRC_DIR"/molt_evo_backup.sh "$TARGET_DIR"/
 chmod +x "$TARGET_DIR"/molt_evo_*.py "$TARGET_DIR"/molt_evo_backup.sh || true
 
-echo "[jarvis] install systemd units"
+echo "[molt_evo] install systemd units"
 cp "$SRC_DIR"/molt-evo-agent.service "$SYSTEMD_DIR"/
 cp "$SRC_DIR"/molt-evo-sync.service "$SYSTEMD_DIR"/
 cp "$SRC_DIR"/molt-evo-sync.timer "$SYSTEMD_DIR"/
@@ -29,12 +27,12 @@ systemctl enable --now molt-evo-sync.timer
 systemctl enable --now molt-evo-backup.timer
 systemctl enable --now molt-evo-message-ingest.timer
 
-echo "[jarvis] initialize db"
+echo "[molt_evo] initialize db"
 python3 "$TARGET_DIR"/molt_evo_memory.py init >/dev/null
 python3 "$TARGET_DIR"/molt_evo_daily_summary.py >/dev/null || true
 
-echo "[jarvis] done"
-systemctl status jarvis-agent --no-pager -l || true
+echo "[molt_evo] done"
+systemctl status molt-evo-agent.service --no-pager -l || true
 echo '---'
 systemctl status molt-evo-sync.timer --no-pager -l || true
 echo '---'
