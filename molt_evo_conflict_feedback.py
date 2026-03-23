@@ -72,7 +72,7 @@ if action == 'keep_old':
     if old_value is not None:
         cur.execute(f'UPDATE {table_name} SET value = ?, updated_ts = ? WHERE key = ?', (old_value, now, item_key))
         cur.execute(f'INSERT INTO {history_table}(item_key, old_value, new_value, changed_ts, source, summary_date) VALUES(?,?,?,?,?,?)',
-                    (item_key, new_value, old_value, now, 'jarvis_conflict_feedback.py', summary_date))
+                    (item_key, new_value, old_value, now, 'molt_evo_conflict_feedback.py', summary_date))
 elif action == 'accept_new':
     pass
 elif action == 'canonicalize_new':
@@ -82,13 +82,13 @@ elif action == 'canonicalize_new':
                 (new_value, canonical_value, now))
     cur.execute(f'UPDATE {table_name} SET value = ?, updated_ts = ? WHERE key = ?', (canonical_value, now, item_key))
     cur.execute(f'INSERT INTO {history_table}(item_key, old_value, new_value, changed_ts, source, summary_date) VALUES(?,?,?,?,?,?)',
-                (item_key, new_value, canonical_value, now, 'jarvis_conflict_feedback.py', summary_date))
+                (item_key, new_value, canonical_value, now, 'molt_evo_conflict_feedback.py', summary_date))
 elif action == 'false_positive':
     pass
 else:
     raise SystemExit(f'unknown action: {action}')
 
 cur.execute('INSERT INTO conflict_feedback(conflict_id, action, feedback_value, resolved_ts, note) VALUES(?,?,?,?,?) ON CONFLICT(conflict_id) DO UPDATE SET action=excluded.action, feedback_value=excluded.feedback_value, resolved_ts=excluded.resolved_ts, note=excluded.note',
-            (conflict_id, action, canonical_value, now, f'resolved by jarvis_conflict_feedback.py'))
+            (conflict_id, action, canonical_value, now, f'resolved by molt_evo_conflict_feedback.py'))
 conn.commit()
 print(json.dumps({'conflict_id': conflict_id, 'action': action, 'feedback_value': canonical_value}, ensure_ascii=False))

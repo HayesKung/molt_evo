@@ -11,10 +11,10 @@ Completed in this pass:
 ## Remaining blockers before public release
 
 Still needs work:
-- script and unit names still use `jarvis_*`
-- some docs and strings still mention Jarvis/Javis branding
+- script and unit names still use `legacy_*`
+- some docs and strings still mention legacy/private naming branding
 - hard-coded workspace/data paths still exist
-- service descriptions still use Jarvis naming
+- service descriptions still use molt_evo naming
 - internal docs still need either rewrite or exclusion from public release
 
 ## Current publish judgment

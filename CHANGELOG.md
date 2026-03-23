@@ -3,7 +3,7 @@
 ## 0.1.0
 
 ### Added
-- Local persistent Jarvis memory database
+- Local persistent molt_evo memory database
 - Daily summary and structured summary storage
 - Preference / profile / rule / project history tracking
 - Real conversation ingestion pipeline

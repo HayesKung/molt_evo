@@ -83,7 +83,7 @@ for table, rows in summary:
             change_records.append((table, k, old_value, v))
             cur.execute(
                 f'INSERT INTO {category_to_history[table]}(item_key, old_value, new_value, changed_ts, source, summary_date) VALUES(?,?,?,?,?,?)',
-                (k, old_value, v, now, 'jarvis_daily_summary.py', summary_date)
+                (k, old_value, v, now, 'molt_evo_daily_summary.py', summary_date)
             )
 
 high_conflicts = cur.execute(
@@ -98,12 +98,12 @@ summary_payload['high_conflicts'] = [
 cur.execute(
     'INSERT INTO daily_summaries(summary_date, generated_ts, source, summary_json) VALUES(?,?,?,?) '
     'ON CONFLICT(summary_date) DO UPDATE SET generated_ts=excluded.generated_ts, source=excluded.source, summary_json=excluded.summary_json',
-    (summary_date, now, 'jarvis_daily_summary.py', json.dumps(summary_payload, ensure_ascii=False))
+    (summary_date, now, 'molt_evo_daily_summary.py', json.dumps(summary_payload, ensure_ascii=False))
 )
 conn.commit()
 
 with OUT.open('a', encoding='utf-8') as f:
-    f.write('\n- Jarvis 自动知识摘要：\n')
+    f.write('\n- molt_evo 自动知识摘要：\n')
     for table, rows in summary:
         f.write(f'  - {table}:\n')
         for k, v in rows:

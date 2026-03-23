@@ -1,4 +1,4 @@
-# Jarvis Chat Commands
+# molt_evo Chat Commands
 
 ## 冲突反馈指令
 
@@ -36,8 +36,8 @@
 ## 当前作用
 
 这些指令会驱动：
-- `jarvis_chat_feedback.py`
-- `jarvis_conflict_feedback.py`
+- `molt_evo_chat_feedback.py`
+- `molt_evo_conflict_feedback.py`
 
 形成：
 - 冲突提醒

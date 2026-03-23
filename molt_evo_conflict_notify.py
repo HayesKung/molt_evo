@@ -18,5 +18,5 @@ if not row:
     print('NO_CONFLICT')
     raise SystemExit(0)
 _, item_key, table_name, old_value, new_value, severity, reason = row
-msg = f"Jarvis 冲突提醒：{table_name}.{item_key} 出现 {severity} 级变化\n旧值：{old_value or '<empty>'}\n新值：{new_value}\n原因：{reason}"
+msg = f"molt_evo 冲突提醒：{table_name}.{item_key} 出现 {severity} 级变化\n旧值：{old_value or '<empty>'}\n新值：{new_value}\n原因：{reason}"
 print(msg)

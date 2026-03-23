@@ -24,7 +24,7 @@ bash manage.sh uninstall
 ```
 
 ## Compatibility note
-During migration, legacy `jarvis_*` scripts may still exist. New integrations should prefer the `molt_evo_*` naming surface and the unified `manage.sh` entrypoint.
+During migration, legacy `legacy_*` scripts may still exist. New integrations should prefer the `molt_evo_*` naming surface and the unified `manage.sh` entrypoint.
 
 ## Release readiness
 Before open-source release, review:

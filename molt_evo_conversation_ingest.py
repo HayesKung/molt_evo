@@ -138,12 +138,12 @@ def upsert_with_history(table, history_table, key, value):
     if old_value != normalized_value:
         cur.execute(
             f'INSERT INTO {history_table}(item_key, old_value, new_value, changed_ts, source, summary_date) VALUES(?,?,?,?,?,?)',
-            (key, old_value, normalized_value, now, 'jarvis_conversation_ingest.py', summary_date)
+            (key, old_value, normalized_value, now, 'molt_evo_conversation_ingest.py', summary_date)
         )
     if conflict:
         cur.execute(
             'INSERT INTO conflict_log(item_key, table_name, old_value, new_value, canonical_value, severity, reason, source, created_ts) VALUES(?,?,?,?,?,?,?,?,?)',
-            (key, table, conflict[2], conflict[3], conflict[4], conflict[5], conflict[6], norm_source or 'jarvis_conversation_ingest.py', now)
+            (key, table, conflict[2], conflict[3], conflict[4], conflict[5], conflict[6], norm_source or 'molt_evo_conversation_ingest.py', now)
         )
 
 extractions = []
@@ -164,9 +164,9 @@ pref_patterns = [
 ]
 
 objective_patterns = [
-    ('jarvis_upgrade_goal', r'高质量自动学习系统'),
-    ('jarvis_autolearn_goal', r'自动增量学习'),
-    ('jarvis_summary_goal', r'每天自动总结[^。\n]*专属个人模型'),
+    ('molt_evo_upgrade_goal', r'高质量自动学习系统'),
+    ('molt_evo_autolearn_goal', r'自动增量学习'),
+    ('molt_evo_summary_goal', r'每天自动总结[^。\n]*专属个人模型'),
 ]
 
 for key, pat in rule_patterns:

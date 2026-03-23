@@ -19,7 +19,7 @@ The public primary entrypoints are now:
 - `manage.sh`
 - `Makefile`
 
-Legacy `jarvis_*` files are currently kept only as a compatibility layer during migration.
+Legacy `legacy_*` files are currently kept only as a compatibility layer during migration.
 
 ## Quick start
 ```bash

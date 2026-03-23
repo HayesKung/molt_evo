@@ -47,7 +47,7 @@ alerts = []
 now = int(time.time())
 for row in rows:
     cid, item_key, table_name, old_value, new_value, canonical_value, severity, reason, created_ts = row
-    content = f"Jarvis 检测到{severity}级冲突：{table_name}.{item_key} 从【{old_value or '<empty>'}】变为【{new_value}】"
+    content = f"molt_evo 检测到{severity}级冲突：{table_name}.{item_key} 从【{old_value or '<empty>'}】变为【{new_value}】"
     meta = {
         'conflict_id': cid,
         'item_key': item_key,

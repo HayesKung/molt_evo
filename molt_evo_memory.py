@@ -74,7 +74,7 @@ def upsert(table: str, key: str, value: str):
         if history_table and old_value != value:
             c.execute(
                 f'INSERT INTO {history_table}(item_key, old_value, new_value, changed_ts, source, summary_date) VALUES(?,?,?,?,?,?)',
-                (key, old_value, value, now, 'jarvis_memory.py', summary_date)
+                (key, old_value, value, now, 'molt_evo_memory.py', summary_date)
             )
 
 
