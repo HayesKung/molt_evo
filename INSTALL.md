@@ -1,51 +1,33 @@
 # INSTALL
 
 ## Requirements
-
 - Linux
 - Python 3
 - systemd
-- An OpenClaw workspace with write access
+- an OpenClaw workspace with write access
 
-## Recommended installation
-
+## Primary entrypoint
 ```bash
-cd /path/to/molt_evo
+bash manage.sh help
+```
+
+## Public command surface
+```bash
 bash manage.sh install
-```
-
-## New machine bootstrap
-
-```bash
-bash manage.sh bootstrap
-```
-
-## Post-install verification
-
-```bash
+bash manage.sh upgrade
 bash manage.sh healthcheck
 bash manage.sh selftest
-```
-
-## Upgrade
-
-```bash
-bash manage.sh upgrade
-```
-
-## Uninstall
-
-```bash
+bash manage.sh bootstrap
+bash manage.sh export
+bash manage.sh import /path/to/export.json merge
 bash manage.sh uninstall
 ```
 
-## Export / Import
+## Compatibility note
+During migration, legacy `jarvis_*` scripts may still exist. New integrations should prefer the `molt_evo_*` naming surface and the unified `manage.sh` entrypoint.
 
-```bash
-bash manage.sh export
-bash manage.sh import /path/to/export.json merge
-```
-
-## Notes
-
-This package is intended to be environment-agnostic. Review configuration defaults before production use, especially workspace paths, systemd unit install paths, and outbound notification behavior.
+## Release readiness
+Before open-source release, review:
+- `AUDIT.md`
+- `SECOND_PASS_REVIEW.md`
+- `PRIVACY_AND_SECURITY.md`

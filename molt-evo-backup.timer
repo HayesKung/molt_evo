@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Jarvis local memory backup periodically
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=molt-evo-backup.service
+
+[Install]
+WantedBy=timers.target

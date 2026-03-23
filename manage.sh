@@ -25,35 +25,35 @@ case "$CMD" in
     bash "$ROOT/bootstrap.sh" "$@"
     ;;
   release)
-    echo "Jarvis OpenClaw release"
+    echo "molt_evo release"
     echo "VERSION: $(cat "$ROOT/VERSION")"
     echo "--- CHANGELOG (latest) ---"
     sed -n '1,80p' "$ROOT/CHANGELOG.md"
     ;;
   export)
-    python3 "$ROOT/jarvis_export.py" "$@"
+    python3 "$ROOT/molt_evo_export.py" "$@"
     ;;
   import)
-    python3 "$ROOT/jarvis_import.py" "$@"
+    python3 "$ROOT/molt_evo_import.py" "$@"
     ;;
   ingest)
-    python3 "$ROOT/jarvis_message_autoload.py" "$@"
+    python3 "$ROOT/molt_evo_message_autoload.py" "$@"
     ;;
   help|--help|-h)
     cat <<'EOF'
 Usage: bash manage.sh <command>
 
 Commands:
-  install       Install Jarvis OpenClaw into /root/.openclaw/workspace
+  install       Install molt_evo into the configured OpenClaw workspace
   upgrade       Upgrade installed files and restart timers/services
   uninstall     Remove installed files/services (preserve DB/memory)
   healthcheck   Run runtime health checks
   selftest      Run end-to-end self test and rollback test data
   bootstrap     New machine bootstrap from zero to working state
   release       Show version + latest changelog
-  export        Export jarvis DB content to JSON
-  import        Import JSON into jarvis DB (merge|replace)
-  ingest        Queue or process real chat text into Jarvis learning pipeline
+  export        Export local DB content to JSON
+  import        Import JSON into local DB (merge|replace)
+  ingest        Queue or process chat text into the learning pipeline
   help          Show this help
 EOF
     ;;

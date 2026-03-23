@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Jarvis message ingest worker periodically
+
+[Timer]
+OnCalendar=minutely
+Persistent=true
+Unit=molt-evo-message-ingest.service
+
+[Install]
+WantedBy=timers.target

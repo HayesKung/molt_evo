@@ -1,23 +1,26 @@
 install:
-	bash install.sh
+	bash manage.sh install
 
 upgrade:
-	bash upgrade.sh
+	bash manage.sh upgrade
 
 uninstall:
-	bash uninstall.sh
+	bash manage.sh uninstall
 
 healthcheck:
-	bash healthcheck.sh
+	bash manage.sh healthcheck
 
 selftest:
-	bash selftest.sh
+	bash manage.sh selftest
 
 bootstrap:
-	bash bootstrap.sh
+	bash manage.sh bootstrap
 
 release:
 	bash manage.sh release
 
 export:
-	python3 jarvis_export.py
+	bash manage.sh export
+
+import:
+	@echo "Usage: bash manage.sh import /path/to/export.json merge"

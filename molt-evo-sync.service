@@ -1,0 +1,8 @@
+[Unit]
+Description=Jarvis knowledge sync
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}
+ExecStart=/bin/bash -lc 'python3 ${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/jarvis_knowledge_sync.py && python3 ${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/jarvis_daily_summary.py'

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Jarvis knowledge sync daily
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+Unit=molt-evo-sync.service
+
+[Install]
+WantedBy=timers.target
