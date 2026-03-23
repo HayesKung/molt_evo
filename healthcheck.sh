@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DB="/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db"
-BACKUP_DIR="/root/.openclaw/workspace/.openclaw/jarvis/backups"
+DB="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db"
+BACKUP_DIR="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/backups"
 
 echo '== Jarvis Healthcheck =='
 
@@ -15,16 +15,16 @@ fi
 
 echo '---'
 echo '[2] Service status'
-systemctl is-active jarvis-agent.service >/dev/null 2>&1 && echo 'jarvis-agent.service: active' || echo 'jarvis-agent.service: inactive'
+systemctl is-active molt-evo-agent.service >/dev/null 2>&1 && echo 'molt-evo-agent.service: active' || echo 'molt-evo-agent.service: inactive'
 
 echo '---'
 echo '[3] Timer status'
-systemctl is-enabled jarvis_sync.timer >/dev/null 2>&1 && echo 'jarvis_sync.timer: enabled' || echo 'jarvis_sync.timer: disabled'
-systemctl is-enabled jarvis_backup.timer >/dev/null 2>&1 && echo 'jarvis_backup.timer: enabled' || echo 'jarvis_backup.timer: disabled'
+systemctl is-enabled molt-evo-sync.timer >/dev/null 2>&1 && echo 'molt-evo-sync.timer: enabled' || echo 'molt-evo-sync.timer: disabled'
+systemctl is-enabled molt-evo-backup.timer >/dev/null 2>&1 && echo 'molt-evo-backup.timer: enabled' || echo 'molt-evo-backup.timer: disabled'
 
 echo '---'
 echo '[4] Recent backup'
-LATEST_BACKUP=$(ls -1t "$BACKUP_DIR"/jarvis_memory-*.db 2>/dev/null | head -n 1 || true)
+LATEST_BACKUP=$(ls -1t "$BACKUP_DIR"/molt_evo_memory-*.db 2>/dev/null | head -n 1 || true)
 if [ -n "${LATEST_BACKUP:-}" ]; then
   echo "latest backup: $LATEST_BACKUP"
 else
@@ -35,7 +35,7 @@ echo '---'
 echo '[5] Conflict alert chain'
 python3 - <<'PY'
 import sqlite3
-p='/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db'
+p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 try:

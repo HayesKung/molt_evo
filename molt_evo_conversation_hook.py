@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
+import os
 import re, sqlite3, sys, time, subprocess, json, os
 from pathlib import Path
 
-ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}'))
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 DEFAULT_PROJECT = os.environ.get('MOLT_EVO_DEFAULT_PROJECT', 'default')
 text = ' '.join(sys.argv[1:]).strip()
 if not text:
-    raise SystemExit('usage: jarvis_conversation_hook.py <text>')
+    raise SystemExit('usage: molt_evo_conversation_hook.py <text>')
 
-feedback_raw = subprocess.check_output(['python3', str(ROOT / 'jarvis_chat_feedback.py'), text], text=True).strip()
+feedback_raw = subprocess.check_output(['python3', str(ROOT / 'molt_evo_chat_feedback.py'), text], text=True).strip()
 try:
     feedback_result = json.loads(feedback_raw)
 except Exception:
     feedback_result = {'matched': False}
 
 if not feedback_result.get('matched'):
-    subprocess.check_output(['python3', str(ROOT / 'jarvis_message_autoload.py'), text], text=True)
+    subprocess.check_output(['python3', str(ROOT / 'molt_evo_message_autoload.py'), text], text=True)
 
 conn = sqlite3.connect(DB)
 conn.execute('CREATE TABLE IF NOT EXISTS project_state_log (id INTEGER PRIMARY KEY AUTOINCREMENT, project TEXT NOT NULL, state TEXT NOT NULL, updated_ts INTEGER NOT NULL)')

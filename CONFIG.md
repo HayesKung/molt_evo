@@ -4,11 +4,11 @@
 
 The current scripts assume an OpenClaw workspace under:
 
-- `/root/.openclaw/workspace`
+- `${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}`
 
 and store local data under:
 
-- `.openclaw/jarvis/`
+- `.openclaw/molt_evo/`
 
 ## Recommended future hardening
 

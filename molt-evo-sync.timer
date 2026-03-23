@@ -1,5 +1,5 @@
 [Unit]
-Description=Run Jarvis knowledge sync daily
+Description=Run molt_evo knowledge sync daily
 
 [Timer]
 OnCalendar=hourly

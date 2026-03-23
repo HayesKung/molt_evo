@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+import os
 import sqlite3, json, sys
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
-OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / '.openclaw' / 'jarvis' / 'molt_evo_export.json'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
+OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_export.json'
 
 conn = sqlite3.connect(DB)
 cur = conn.cursor()

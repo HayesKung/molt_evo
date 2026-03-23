@@ -2,15 +2,15 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
-WORKSPACE="/root/.openclaw/workspace"
-DB="$WORKSPACE/.openclaw/jarvis/jarvis_memory.db"
+WORKSPACE="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}"
+DB="$WORKSPACE/.openclaw/molt_evo/molt_evo_memory.db"
 TEST_KEY="selftest_response_style"
 TEST_CONFLICT_ID=""
 
 cleanup() {
 python3 - <<'PY'
 import sqlite3
-p='/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db'
+p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 for sql in [
@@ -34,12 +34,12 @@ PY
 trap cleanup EXIT
 
 echo '[selftest] write test preference v1'
-python3 "$WORKSPACE/jarvis_memory.py" pref "$TEST_KEY" "selftest_v1"
+python3 "$WORKSPACE/molt_evo_memory.py" pref "$TEST_KEY" "selftest_v1"
 
 echo '[selftest] force conflict via conversation ingest equivalent update'
 python3 - <<'PY'
 import sqlite3, time
-p='/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db'
+p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 cur.execute('''CREATE TABLE IF NOT EXISTS conflict_log (
@@ -62,7 +62,7 @@ PY
 
 CONFLICT_ID=$(python3 - <<'PY'
 import sqlite3
-p='/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db'
+p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 print(cur.execute("SELECT id FROM conflict_log WHERE item_key='selftest_response_style' ORDER BY id DESC LIMIT 1").fetchone()[0])
@@ -72,18 +72,18 @@ PY
 echo "[selftest] conflict_id=$CONFLICT_ID"
 
 echo '[selftest] trigger alert generation'
-python3 "$WORKSPACE/jarvis_conflict_alerts.py" >/dev/null
+python3 "$WORKSPACE/molt_evo_conflict_alerts.py" >/dev/null
 
 echo '[selftest] trigger notify text'
-python3 "$WORKSPACE/jarvis_conflict_notify.py" >/dev/null
+python3 "$WORKSPACE/molt_evo_conflict_notify.py" >/dev/null
 
 echo '[selftest] apply feedback canonicalize_new'
-python3 "$WORKSPACE/jarvis_conflict_feedback.py" "$CONFLICT_ID" canonicalize_new selftest_v1 >/dev/null
+python3 "$WORKSPACE/molt_evo_conflict_feedback.py" "$CONFLICT_ID" canonicalize_new selftest_v1 >/dev/null
 
 echo '[selftest] verify chain'
 python3 - <<'PY'
 import sqlite3
-p='/root/.openclaw/workspace/.openclaw/jarvis/jarvis_memory.db'
+p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 checks = {

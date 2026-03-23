@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+import os
 import re, subprocess, sys, json
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
 text = ' '.join(sys.argv[1:]).strip()
 if not text:
-    raise SystemExit('usage: jarvis_chat_feedback.py <text>')
+    raise SystemExit('usage: molt_evo_chat_feedback.py <text>')
 
 patterns = [
     (r'^保留旧值\s+(\d+)$', 'keep_old'),
@@ -19,10 +20,10 @@ for pat, action in patterns:
     if m:
         if action == 'canonicalize_new':
             conflict_id, canonical_value = m.group(1), m.group(2)
-            cmd = ['python3', str(ROOT / 'jarvis_conflict_feedback.py'), conflict_id, action, canonical_value]
+            cmd = ['python3', str(ROOT / 'molt_evo_conflict_feedback.py'), conflict_id, action, canonical_value]
         else:
             conflict_id = m.group(1)
-            cmd = ['python3', str(ROOT / 'jarvis_conflict_feedback.py'), conflict_id, action]
+            cmd = ['python3', str(ROOT / 'molt_evo_conflict_feedback.py'), conflict_id, action]
         out = subprocess.check_output(cmd, text=True).strip()
         print(json.dumps({'matched': True, 'action': action, 'result': out}, ensure_ascii=False))
         raise SystemExit(0)

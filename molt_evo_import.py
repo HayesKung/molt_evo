@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
+import os
 import sqlite3, json, sys, time, shutil
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 SRC = Path(sys.argv[1])
 MODE = sys.argv[2] if len(sys.argv) > 2 else 'merge'
 if not SRC.exists():
     raise SystemExit(f'missing import file: {SRC}')
 
-backup_dir = ROOT / '.openclaw' / 'jarvis' / 'backups'
+backup_dir = ROOT / '.openclaw' / 'molt_evo' / 'backups'
 backup_dir.mkdir(parents=True, exist_ok=True)
 ts = time.strftime('%Y-%m-%d-%H%M%S')
 shutil.copy2(DB, backup_dir / f'pre-import-{ts}.db')

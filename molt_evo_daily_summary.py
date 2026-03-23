@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+import os
 from pathlib import Path
 import sqlite3, time, json
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 OUT = ROOT / 'memory' / f"{time.strftime('%Y-%m-%d')}.md"
 OUT.parent.mkdir(parents=True, exist_ok=True)
 

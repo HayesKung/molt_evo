@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+import os
 import json, sqlite3, sys, time
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DATA = ROOT / '.openclaw' / 'jarvis'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DATA = ROOT / '.openclaw' / 'molt_evo'
 DATA.mkdir(parents=True, exist_ok=True)
 DB = DATA / 'molt_evo_memory.db'
 

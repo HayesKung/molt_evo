@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+import os
 import sys, subprocess, json, time
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-QUEUE = ROOT / '.openclaw' / 'jarvis' / 'message_ingest.log'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+QUEUE = ROOT / '.openclaw' / 'molt_evo' / 'message_ingest.log'
 QUEUE.parent.mkdir(parents=True, exist_ok=True)
 
 if len(sys.argv) > 1:
@@ -27,7 +28,7 @@ remaining = []
 processed = 0
 for line in lines:
     try:
-        subprocess.check_output(['python3', str(ROOT / 'jarvis_conversation_ingest.py'), line], text=True)
+        subprocess.check_output(['python3', str(ROOT / 'molt_evo_conversation_ingest.py'), line], text=True)
         processed += 1
     except Exception:
         remaining.append(line)

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
+import os
 import sqlite3, sys, time, json
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 
 if len(sys.argv) < 3:
-    raise SystemExit('usage: jarvis_conflict_feedback.py <conflict_id> <keep_old|accept_new|canonicalize_new|false_positive> [canonical_value]')
+    raise SystemExit('usage: molt_evo_conflict_feedback.py <conflict_id> <keep_old|accept_new|canonicalize_new|false_positive> [canonical_value]')
 
 conflict_id = int(sys.argv[1])
 action = sys.argv[2]

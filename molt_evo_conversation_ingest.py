@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
+import os
 import re, sqlite3, sys, time
 from pathlib import Path
 
-ROOT = Path('${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}')
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 text = ' '.join(sys.argv[1:]).strip()
 if not text:
-    raise SystemExit('usage: jarvis_conversation_ingest.py <text>')
+    raise SystemExit('usage: molt_evo_conversation_ingest.py <text>')
 
 now = int(time.time())
 summary_date = time.strftime('%Y-%m-%d')

@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+import os
 import sqlite3, json, os
 from pathlib import Path
 
-ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}'))
-DB = ROOT / '.openclaw' / 'jarvis' / 'molt_evo_memory.db'
+ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+DB = ROOT / '.openclaw' / 'molt_evo' / 'molt_evo_memory.db'
 DEFAULT_CHANNEL = os.environ.get('MOLT_EVO_DEFAULT_CHANNEL', '')
 DEFAULT_TARGET = os.environ.get('MOLT_EVO_DEFAULT_TARGET', '')
 
