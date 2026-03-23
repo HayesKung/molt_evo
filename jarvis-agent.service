@@ -1,0 +1,13 @@
+[Unit]
+Description=Jarvis local persistence helper
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/root/.openclaw/workspace
+ExecStart=/bin/bash -lc 'while true; do python3 /root/.openclaw/workspace/jarvis_memory.py init >/dev/null; sleep 300; done'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

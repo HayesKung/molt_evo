@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Jarvis message ingest worker periodically
+
+[Timer]
+OnCalendar=minutely
+Persistent=true
+Unit=jarvis_message_ingest.service
+
+[Install]
+WantedBy=timers.target
