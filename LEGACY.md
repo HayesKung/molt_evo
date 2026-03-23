@@ -1,6 +1,6 @@
 # LEGACY
 
-This repository keeps a legacy compatibility area under `compat/legacy-jarvis/`.
+This repository keeps a legacy compatibility area under `release-excluded/compat/legacy-jarvis/`.
 
 ## Purpose
 - preserve migration history during the rename from older private/internal naming
