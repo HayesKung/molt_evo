@@ -18,7 +18,6 @@ systemctl daemon-reload
 
 rm -f "$TARGET_DIR"/molt_evo_*.py
 rm -f "$TARGET_DIR"/molt_evo_backup.sh
-rm -f "$TARGET_DIR"/JARVIS_MODE.md
 rm -f "$TARGET_DIR"/docs-jarvis-setup.md
 rm -f "$TARGET_DIR"/docs-jarvis-structured-summary-upgrade.md
 rm -f "$TARGET_DIR"/docs-jarvis-preference-history-upgrade.md
