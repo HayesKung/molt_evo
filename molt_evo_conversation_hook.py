@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os
-import re, sqlite3, sys, time, subprocess, json, os
+import re, sqlite3, sys, time, subprocess, json
 from pathlib import Path
 
 ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))

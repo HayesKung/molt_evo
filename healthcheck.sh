@@ -34,6 +34,7 @@ fi
 echo '---'
 echo '[5] Conflict alert chain'
 python3 - <<'PY'
+import os
 import sqlite3
 p=os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace') + '/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)

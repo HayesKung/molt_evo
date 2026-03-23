@@ -6,6 +6,8 @@ from pathlib import Path
 ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
 DATA = ROOT / '.openclaw' / 'molt_evo'
 DATA.mkdir(parents=True, exist_ok=True)
+if (not DB.exists()) and LEGACY_DB.exists():
+    DB.write_bytes(LEGACY_DB.read_bytes())
 DB = DATA / 'molt_evo_memory.db'
 
 SCHEMA = '''
