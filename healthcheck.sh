@@ -4,7 +4,7 @@ set -euo pipefail
 DB="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db"
 BACKUP_DIR="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/backups"
 
-echo '== Jarvis Healthcheck =='
+echo '== molt_evo Healthcheck =='
 
 echo '[1] DB check'
 if [ -f "$DB" ]; then
@@ -35,7 +35,7 @@ echo '---'
 echo '[5] Conflict alert chain'
 python3 - <<'PY'
 import sqlite3
-p='${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/.openclaw/molt_evo/molt_evo_memory.db'
+p=os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace') + '/.openclaw/molt_evo/molt_evo_memory.db'
 conn=sqlite3.connect(p)
 cur=conn.cursor()
 try:
