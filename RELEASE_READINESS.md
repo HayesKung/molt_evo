@@ -1,11 +1,8 @@
 # RELEASE_READINESS
 
 ## Public release surface
-This repository's intended public release surface excludes:
-- `release-excluded/compat/`
-- `release-excluded/archive/internal-docs/`
-
-These directories are retained locally for migration history and compatibility review, but are not part of the strict public product surface.
+This repository's intended public release surface includes only the public `molt_evo` runtime files and docs.
+Private migration history, compatibility leftovers, and internal notes should be archived outside the public repository before release.
 
 ## Required public entrypoints
 - `molt_evo_*` scripts

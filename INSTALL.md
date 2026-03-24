@@ -25,7 +25,7 @@ bash manage.sh uninstall
 
 ## Compatibility note
 Public integrations should use the `molt_evo_*` script surface and the unified `manage.sh` entrypoint.
-Legacy migration material is retained only under `release-excluded/` and is not part of the public release surface.
+Legacy migration material should be archived outside the public repository.
 
 ## Release readiness
 Before open-source release, review:

@@ -1,8 +1,0 @@
-[Unit]
-Description=Jarvis message ingest worker
-After=network.target
-
-[Service]
-Type=oneshot
-WorkingDirectory=/root/.openclaw/workspace
-ExecStart=/bin/bash -lc 'python3 /root/.openclaw/workspace/jarvis_message_autoload.py'

@@ -52,4 +52,5 @@ bash manage.sh uninstall
 - path and runtime behavior should be configured through environment variables where needed
 
 ## Release surface
-Historical migration material is kept outside the strict public release surface under `release-excluded/`.
+This repository is intended to contain only the public `molt_evo` runtime surface.
+Private migration history and legacy compatibility material should be archived outside the public Git repository.
