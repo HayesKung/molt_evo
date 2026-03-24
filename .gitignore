@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+.env
+.venv/
+venv/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.tmp
+*.swp
+.DS_Store
+.openclaw/
