@@ -43,14 +43,10 @@ bash manage.sh uninstall
 - `RELEASE.md`
 - `CHANGELOG.md`
 - `CHAT_COMMANDS.md`
-- `VERSION`
-- `SKILL.md`
+- `CONTRIBUTING.md`
+- `LICENSE`
 
 ## Runtime notes
 - default runtime data root: `.openclaw/molt_evo`
 - default database filename: `molt_evo_memory.db`
-- path and runtime behavior should be configured through environment variables where needed
-
-## Release surface
-This repository is intended to contain only the public `molt_evo` runtime surface.
-Private migration history and legacy compatibility material should be archived outside the public Git repository.
+- runtime behavior should be configured through environment variables where needed
