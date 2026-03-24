@@ -24,7 +24,8 @@ bash manage.sh uninstall
 ```
 
 ## Compatibility note
-During migration, legacy `legacy_*` scripts may still exist. New integrations should prefer the `molt_evo_*` naming surface and the unified `manage.sh` entrypoint.
+Public integrations should use the `molt_evo_*` script surface and the unified `manage.sh` entrypoint.
+Legacy migration material is retained only under `release-excluded/` and is not part of the public release surface.
 
 ## Release readiness
 Before open-source release, review:
