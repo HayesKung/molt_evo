@@ -1,12 +1,12 @@
 # LEGACY
 
-This repository keeps a legacy compatibility area under `release-excluded/compat/legacy-jarvis/`.
+Legacy migration material is retained under `release-excluded/` for local transition history only.
 
 ## Purpose
-- preserve migration history during the rename from older private/internal naming
-- keep old scripts available for controlled reference during transition
+- preserve limited migration context during repository cleanup
+- keep non-public transition material out of the primary runtime surface
 
 ## Release policy
-- legacy content is not part of the public primary entrypoint
+- legacy material is not part of the public primary entrypoint
 - new integrations must use the `molt_evo_*` scripts and `molt-evo-*` units
-- legacy content should be removed or separately archived before a strict public release tag
+- legacy material should be removed or separately archived before a strict public release tag

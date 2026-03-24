@@ -11,10 +11,9 @@ Completed in this pass:
 ## Remaining blockers before public release
 
 Still needs work:
-- script and unit names still use `legacy_*`
-- some docs and strings still mention legacy/private naming branding
-- hard-coded workspace/data paths still exist
-- service descriptions still use molt_evo naming
+- some docs and strings still mention private migration history
+- default workspace/data paths still need one more pass of review
+- branch / release metadata still need public publishing cleanup
 - internal docs still need either rewrite or exclusion from public release
 
 ## Current publish judgment

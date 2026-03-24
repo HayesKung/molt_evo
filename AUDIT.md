@@ -6,21 +6,20 @@ Current status: **not yet ready for direct public release**.
 
 ## Why
 
-Although the repository has been flattened and generic documentation has been added, the codebase still requires a second-pass scrub for:
+Although the repository has been flattened and generic documentation has been added, the codebase still requires a final public-release scrub for:
 
-- file and symbol names still using `legacy_*`
-- hard-coded workspace paths
-- service descriptions naming molt_evo explicitly
-- historical documentation files whose names and contents are still molt_evo-specific
+- any remaining private migration references in docs or compatibility notes
+- default workspace path assumptions that should stay configurable
+- release metadata and branch hygiene for public publishing
 - runtime scripts that may still assume private deployment conventions
 
-## Required next pass before public release
+## Required final pass before public release
 
-1. rename files and script entrypoints from `legacy_*` to `molt_evo_*` where appropriate
-2. replace hard-coded `/root/.openclaw/workspace` assumptions with configurable paths
-3. remove or archive internal migration docs not meant for public consumers
+1. remove or archive private migration notes from the public release surface
+2. keep workspace and runtime paths environment-configurable
+3. verify branch / tag / release metadata are public-safe
 4. review systemd units for generic descriptions and paths
-5. run a full sensitive-string scan again after renaming
+5. run a full sensitive-string scan again before publishing
 
 ## Current judgment
 
