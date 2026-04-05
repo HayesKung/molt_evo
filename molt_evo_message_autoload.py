@@ -4,6 +4,7 @@ import sys, subprocess, json, time
 from pathlib import Path
 
 ROOT = Path(os.environ.get('MOLT_EVO_WORKSPACE', '/root/.openclaw/workspace'))
+SCRIPT_DIR = Path(__file__).resolve().parent
 QUEUE = ROOT / '.openclaw' / 'molt_evo' / 'message_ingest.log'
 QUEUE.parent.mkdir(parents=True, exist_ok=True)
 
@@ -28,7 +29,7 @@ remaining = []
 processed = 0
 for line in lines:
     try:
-        subprocess.check_output(['python3', str(ROOT / 'molt_evo_conversation_ingest.py'), line], text=True)
+        subprocess.check_output(['python3', str(SCRIPT_DIR / 'molt_evo_conversation_ingest.py'), line], text=True)
         processed += 1
     except Exception:
         remaining.append(line)

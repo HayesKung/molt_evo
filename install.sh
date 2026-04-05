@@ -5,7 +5,7 @@ SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 TARGET_DIR="${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}"
 SYSTEMD_DIR="/etc/systemd/system"
 
-echo "[molt_evo] sync scripts to $TARGET_DIR"
+echo "[molt_evo] ensure workspace exists: $TARGET_DIR"
 mkdir -p "$TARGET_DIR"
 
 cp "$SRC_DIR"/molt_evo_*.py "$TARGET_DIR"/
@@ -28,8 +28,8 @@ systemctl enable --now molt-evo-backup.timer
 systemctl enable --now molt-evo-message-ingest.timer
 
 echo "[molt_evo] initialize db"
-python3 "$TARGET_DIR"/molt_evo_memory.py init >/dev/null
-python3 "$TARGET_DIR"/molt_evo_daily_summary.py >/dev/null || true
+MOLT_EVO_REPO_DIR="$SRC_DIR" python3 "$SRC_DIR"/molt_evo_memory.py init >/dev/null
+MOLT_EVO_REPO_DIR="$SRC_DIR" python3 "$SRC_DIR"/molt_evo_daily_summary.py >/dev/null || true
 
 echo "[molt_evo] done"
 systemctl status molt-evo-agent.service --no-pager -l || true

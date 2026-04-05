@@ -4,5 +4,7 @@ After=network.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}
-ExecStart=/bin/bash ${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/molt_evo_backup.sh
+Environment=MOLT_EVO_WORKSPACE=/root/.openclaw/workspace
+Environment=MOLT_EVO_REPO_DIR=/github/molt_evo
+WorkingDirectory=/root/.openclaw/workspace
+ExecStart=/bin/bash /github/molt_evo/molt_evo_backup.sh

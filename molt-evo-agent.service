@@ -4,8 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}
-ExecStart=/bin/bash -lc 'while true; do python3 ${MOLT_EVO_WORKSPACE:-/root/.openclaw/workspace}/molt_evo_memory.py init >/dev/null; sleep 300; done'
+Environment=MOLT_EVO_WORKSPACE=/root/.openclaw/workspace
+Environment=MOLT_EVO_REPO_DIR=/github/molt_evo
+WorkingDirectory=/root/.openclaw/workspace
+ExecStart=/bin/bash -lc 'while true; do python3 $MOLT_EVO_REPO_DIR/molt_evo_memory.py init >/dev/null; sleep 300; done'
 Restart=always
 RestartSec=5
 
